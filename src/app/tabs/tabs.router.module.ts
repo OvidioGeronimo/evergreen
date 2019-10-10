@@ -8,12 +8,11 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
+        path: 'produtos',
         children: [
           {
             path: '',
-            loadChildren: () =>
-              import('../tab1/tab1.module').then(m => m.Tab1PageModule)
+            loadChildren: '../produtos/lista-produtos/lista-produtos.module#ListaProdutosPageModule'
           }
         ]
       },
@@ -28,25 +27,57 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'tab3',
+        path: 'perfil',
         children: [
           {
             path: '',
-            loadChildren: () =>
-              import('../tab3/tab3.module').then(m => m.Tab3PageModule)
+            loadChildren:'../usuarios/perfil/perfil.module#PerfilPageModule'
+
           }
         ]
       },
+      
       {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: '/tabs/produtos',
         pathMatch: 'full'
       }
     ]
   },
   {
+    path: 'usuarios',
+    children: [
+      {
+        path: 'enderecos',
+        loadChildren:'../enderecos/lista-endereco/lista-endereco.module#ListaEnderecoPageModule'
+      },
+      {
+        path: 'enderecos/novo',
+        loadChildren:'../enderecos/form-endereco/form-endereco.module#FormEnderecoPageModule'
+      },
+      {
+        path: 'enderecos/editar/:key',
+        loadChildren:'../enderecos/form-endereco/form-endereco.module#FormEnderecoPageModule'
+      }
+    ]
+  },
+  {
+    path: 'pedido',
+    children: [
+      {
+        path: 'carrinho/novo-item/:key',
+        loadChildren:'../pedidos/form-item-pedido/form-item-pedido.module#FormItemPedidoPageModule'
+      },
+      {
+        path: 'carrinho',
+        loadChildren:'../pedidos/lista-item-pedido/lista-item-pedido.module#ListaItemPedidoPageModule'
+      }
+    ]
+  },
+
+  {
     path: '',
-    redirectTo: '/tabs/tab1',
+    redirectTo: '/tabs/produtos',
     pathMatch: 'full'
   }
 ];

@@ -20,7 +20,7 @@ export class ProdutosService {
     }).snapshotChanges().pipe(
      map(changes => {
        return changes.map(m => ({key: m.payload.key, ...m.payload.val() }));
-     }) 
+     })
     )
   }
 //isso é uma adaptação de preguiçoso
@@ -32,15 +32,14 @@ export class ProdutosService {
       })
     )
   }
-//buscar produtos por uma key 
+//buscar produtos por uma key
   getByKey(key:string){
     //os $ servem para concatenar uma variavel com uma constante produto/s'+'key
-    
+
     const path = `${FirebasePath.PRODUTOS}${key}`;
     return this.db.object(path).snapshotChanges().pipe(map(change =>{
       return({key:change.key, ...change.payload.val() });
       })
     )
   }
-
 }
